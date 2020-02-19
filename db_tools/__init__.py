@@ -10,9 +10,9 @@ class MyDBM:
     def __init__(self):
         self.database = pymysql.connect(host=host, user=user, password=password, port=port)
         self.handler = self.database.cursor()
-        self.use_database('news')
+        self.use_database()
 
-    def use_database(self, database):
+    def use_database(self, database='news'):
         if not self.handler.execute(f"select * from information_schema.SCHEMATA where SCHEMA_NAME='{database}'"):
             self.handler.execute(f"create database {database}")  # 先建立再选定
         self.handler.execute(f'use {database};')

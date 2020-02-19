@@ -1,21 +1,23 @@
 from db_tools import MyDBM
 import datetime
-table_base = 'news_{}_tmt'
+
+table_base = 'news_{}_kr'
 create_news_table = '''create table {}(
 id int primary key auto_increment,
 url varchar(100),
 title varchar(200),
-publish_time varchar(5),
-likes int
+description varchar(1000),
+publish_time VARCHAR(20),
+username varchar(20)
 );
 '''
 insert_news = '''insert {}
-(url, title, publish_time, likes)
+(url, title, description, publish_time, username)
 values ({})
 '''
 
 
-class TmtDBM(MyDBM):
+class KrDBM(MyDBM):
     def dump_news(self, record):
         handler = self.database.cursor()
         cur_date = datetime.date.today().strftime('%Y_%m_%d')
